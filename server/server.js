@@ -74,15 +74,17 @@ app.get("/AuthUser", (req,res,next) => {
         const base64Cred= req.headers.authorization.split(' ')[1];
         const cred = Buffer.from(base64Cred, 'base64').toString('ascii');
         const creds = cred.split(':');
-	console.log(cred);
+	console.log(creds[0] + "   " + creds[1]);
 	var sql = "SELECT Password FROM Login WHERE Username = ?";
 	var values = [CryptoJS.MD5(creds[0]).toString()];
 	con.query(sql, values, function(err, result){
 		if(err) throw err;
+		console.log(result[0].Password + " <- result / inputed Pass -> " + CryptoJS.MD5(creds[1]));
 		if(result[0] == null)
 			return res.status(404).json({message : "Username not valid"});
 		if(result[0].Password == CryptoJS.MD5(creds[1]).toString())
 		{
+			console.log("Found User");
        	 		var signedToken = signToken(creds[0]);
 			return res.status(200).json({message: 'good', token: signedToken});
 		}
@@ -126,23 +128,12 @@ app.get("/GetLures", (req, res, next) => {
 	}catch{
 		return res.status(401).json({message : "Not Authorized"});
 	}
-	var sql = "select G.Name, L.DiveEquation 
-	from Lure L 
-	inner join Gear G on L.ID = G.ID 
-	inner join gearType GT on G.GearType = GT.id 
-	where GT.Type = 'Diving lure' or GT.Type = 'Flat lure';";
-        con.query(sql, values, function(err, result){
+	var sql = "select G.Name, L.DiveEquation from Lure L inner join Gear G on L.ID = G.ID inner join gearType GT on G.GearType = GT.id where GT.Type = 'Diving lure' or GT.Type = 'Flat lure';";
+        con.query(sql, function(err, result){
 	        if(err) throw err;
-                if(result[0] == null)
-                        return res.status(404).json({message : "Username not valid"}
-		);
-                if(result[0].Password == CryptoJS.MD5(creds[1]).toString())
-                {
-	                var signedToken = signToken(creds[0]);
-                        return res.status(200).json({message: 'good', token: signedToken});
-                }
-                else
-	                return res.status(401).json({message : "Bad"});
+                console.log(result[0]);
+		console.log(result.length);
+		console.log(result[0].Name);
         });
 
 });
