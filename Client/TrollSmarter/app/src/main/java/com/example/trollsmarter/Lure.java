@@ -1,19 +1,32 @@
 package com.example.trollsmarter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.json.JSONObject;
 
 public class Lure {
-    private JSONObject diveCurve;
-    private String name;
+    @JsonProperty("DiveEquation")
+    private String DiveEquation;
+    @JsonProperty("Name")
+    private String Name;
 
-    public JSONObject getDiveCurve(){
-        return diveCurve;
+
+    public String getDiveCurve(){
+        return DiveEquation;
     }
     public String getName(){
-        return name;
+        return Name;
     }
-    public Lure(String Name, JSONObject DiveCurve){
-        name = Name;
-        diveCurve = DiveCurve;
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public void setDiveEquation(String diveEquation) {
+        DiveEquation = diveEquation;
+    }
+    @Override
+    public String toString(){
+        return Name;
     }
 }
