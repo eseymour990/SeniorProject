@@ -131,11 +131,20 @@ app.get("/GetLures", (req, res, next) => {
 	var sql = "select G.Name, L.DiveEquation from Lure L inner join Gear G on L.ID = G.ID inner join gearType GT on G.GearType = GT.id where GT.Type = 'Diving lure' or GT.Type = 'Flat lure';";
         con.query(sql, function(err, result){
 	        if(err) throw err;
-                console.log(result[0]);
-		console.log(result.length);
-		console.log(result[0].Name);
+			
+		return res.status(200).json(JSON.stringify(result));
         });
 
+});
+
+app.get("/GetTrollingDevices",(req, res, next) => {
+	if(!IsAuth(req))
+		return res.status(401).json({message : "Not authorized"});
+	var sql = "select G.Name, L.DiveEquation from Lure L inner join Gear G on L.ID = G.ID inner join gearType GT on G.GearType = GT.id where GT.Type = 'Diver/Trolling Device';";
+	con.query(sql, function(err, result){
+		if(err) throw err;
+		return res.status(200).json(JSON.stringify(result));
+	});
 });
 
 //app.post("/postTest", (req, res, next) => {
