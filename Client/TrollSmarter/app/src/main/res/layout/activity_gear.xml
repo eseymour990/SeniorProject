@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".GearActivity">
 
-    <Spinner
-        android:id="@+id/trollingDeviceSpinner"
-        android:layout_width="170dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="108dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -56,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/trollingDeviceSpinner2"
+        android:id="@+id/lureSpinner"
         android:layout_width="170dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -78,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="191dp" />
+        app:layout_constraintGuide_begin="224dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -94,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="95dp" />
+        app:layout_constraintGuide_begin="139dp" />
 
     <Button
         android:id="@+id/AddTrollingDevice"
@@ -118,11 +109,36 @@
 
     <Spinner
         android:id="@+id/TrollingDeviceSpinner"
-        android:layout_width="170dp"
-        android:layout_height="30dp"
+        style="@style/Widget.AppCompat.Spinner.DropDown"
+        android:layout_width="164dp"
+        android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="32dp"
+        android:spinnerMode="dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editLeaderLength"
+        android:layout_width="178dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:text="Enter Length"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="241dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
