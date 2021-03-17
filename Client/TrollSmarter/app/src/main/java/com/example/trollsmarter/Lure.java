@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.json.JSONObject;
 
-public class Lure {
+import java.io.Serializable;
+
+public class Lure implements Serializable {
     @JsonProperty("DiveEquation")
     private String DiveEquation;
     @JsonProperty("Name")

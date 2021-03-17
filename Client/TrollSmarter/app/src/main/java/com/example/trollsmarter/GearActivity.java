@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -33,6 +35,7 @@ public class GearActivity extends AppCompatActivity {
     public List<Lure> lureList;
     public List<Lure> trollingDeviceList;
     private String user;
+    private UserData userData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +43,27 @@ public class GearActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Button saveButton = findViewById(R.id.saveButton);
+        user = intent.getStringExtra("User");
+        userData = (UserData) intent.getSerializableExtra("UserData");
         saveButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                
+                Spinner trollingSpinner = findViewById(R.id.TrollingDeviceSpinner);
+                Spinner lureSpinner = findViewById(R.id.lureSpinner);
+                TextView tv = findViewById(R.id.editLeaderLength);
+                userData.SetTrollingDevice((Lure) trollingSpinner.getSelectedItem());
+                userData.SetLure((Lure) lureSpinner.getSelectedItem());
+                userData.SetLeaderLength(tv.getText().toString());
+                Intent mainIntent = new Intent(GearActivity.this, MainActivity.class);
+
+                mainIntent.putExtra("User", user);
+                mainIntent.putExtra("UserData", userData);
+                startActivity(mainIntent);
+                finish();
             }
         });
-        user = intent.getStringExtra("User");
+
 
         try {
             Lure[] lures = new LureGetTask().execute(user).get();
@@ -61,6 +77,7 @@ public class GearActivity extends AppCompatActivity {
             ArrayAdapter trollingAdapter = new ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, trollingDeviceList);
             trollingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             trollingDeviceSpinner.setAdapter(trollingAdapter);
+
 
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -186,9 +203,6 @@ public class GearActivity extends AppCompatActivity {
                 if (responseCode == 200) {
                     try{
                         trollingDeviceList = mapper.reader().forType(new TypeReference<List<Lure>>() {}).readValue(jsonStr);
-                        for(Lure l : lureList){
-                            System.out.println(l);
-                        }
                     }catch (IOException e){
                         e.printStackTrace();
                     }
