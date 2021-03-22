@@ -1,8 +1,8 @@
-package com.example.trollsmarter;
+package com.example.trollsmarter.HelperClasses;
+
+import com.example.trollsmarter.HelperClasses.Lure;
 
 import java.io.Serializable;
-
-import javax.crypto.SealedObject;
 
 public class UserData implements Serializable {
     public Lure _lure;

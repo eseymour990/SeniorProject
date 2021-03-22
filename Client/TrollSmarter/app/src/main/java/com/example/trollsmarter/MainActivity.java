@@ -6,29 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.telephony.CarrierConfigManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.trollsmarter.data.model.LoggedInUser;
-import com.example.trollsmarter.ui.login.LoginActivity;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import com.example.trollsmarter.HelperClasses.DiveEquationHelper;
+import com.example.trollsmarter.HelperClasses.UserData;
 
 import static java.lang.Thread.sleep;
 
@@ -36,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String User;
     public UserData userData;
+    public boolean started;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,36 +61,31 @@ public class MainActivity extends AppCompatActivity {
             userData = new UserData();
         }
         setContentView(R.layout.activity_main);
-
+        started = false;
     }
 
 
-    public void FishCatught(View view){
-        //clean this up it looks terrible
-        Location a= new Location(Context.LOCATION_SERVICE);
-        a.setSpeed(2.5f);
-        String tdeq = userData.GetTrollingDevice().getDiveCurve().substring(2);
-        String leq = userData.GetLure().getDiveCurve().substring(2);
-        String ldb = leq.substring(0,leq.indexOf("x") - 1);
-        String lde = leq.substring(leq.indexOf("x") + 3);
-        String tdb = tdeq.substring(0,tdeq.indexOf("x") - 1);
-        String tde = tdeq.substring(tdeq.indexOf("x") + 3);
-        String depth = "50";
-        double y = Double.parseDouble(depth);
-        double top = -y+Double.parseDouble(tde);
-        double bottom = Double.parseDouble(tdb);
-        double logx = top/-bottom;
-        double fin = Math.pow(10,logx);
-        y = Double.parseDouble(userData.GetLeaderLength());
-        top = -y+Double.parseDouble(lde);
-        bottom = Double.parseDouble(ldb);
-        if(bottom != 0.0) {
-            logx = top / -bottom;
-            fin += Math.pow(10, logx);
-        }
+    public void Start(View view){
         TextView tv = findViewById(R.id.textBox1);
-        tv.setText("Line out: " + fin);
-
+        Button startButton = findViewById(R.id.Start);
+        if(!started) {
+            tv.setVisibility(View.VISIBLE);
+            Location a = new Location(Context.LOCATION_SERVICE);
+            a.setSpeed(2.5f);
+            TextView textView = findViewById(R.id.desiredDepth);
+            DiveEquationHelper lureHelper = new DiveEquationHelper(userData.GetLure().getDiveCurve());
+            DiveEquationHelper trollingDeviceHelper = new DiveEquationHelper(userData.GetTrollingDevice().getDiveCurve());
+            double lureDepth = lureHelper.FindDepth(Double.parseDouble(userData._leaderLength));
+            double fin = trollingDeviceHelper.FindLineOut(Double.parseDouble(textView.getText().toString()) - lureDepth);
+            started = true;
+            startButton.setText("Stop");
+            tv.setText("Line out: " + fin);
+        }
+        else {
+            tv.setVisibility(View.INVISIBLE);
+            startButton.setText("Start");
+            started = false;
+        }
 
 
     }

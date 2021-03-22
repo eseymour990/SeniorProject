@@ -1,4 +1,4 @@
-package com.example.trollsmarter;
+package com.example.trollsmarter.HelperClasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

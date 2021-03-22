@@ -1,6 +1,7 @@
 package com.example.trollsmarter;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -13,17 +14,20 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.trollsmarter.Alerts.LeaderLengthAlert;
+import com.example.trollsmarter.HelperClasses.Lure;
+import com.example.trollsmarter.HelperClasses.UserData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -54,6 +58,13 @@ public class GearActivity extends AppCompatActivity {
                 TextView tv = findViewById(R.id.editLeaderLength);
                 userData.SetTrollingDevice((Lure) trollingSpinner.getSelectedItem());
                 userData.SetLure((Lure) lureSpinner.getSelectedItem());
+                if(tv.getText().toString().length() == 0){
+                    DialogFragment dialog = new LeaderLengthAlert();
+                    dialog.show(getSupportFragmentManager(), "LeaderLengthAlert");
+                    TextView leaderlength = findViewById(R.id.leaderLengthText);
+                    leaderlength.setTextColor(Color.RED);
+                    return;
+                }
                 userData.SetLeaderLength(tv.getText().toString());
                 Intent mainIntent = new Intent(GearActivity.this, MainActivity.class);
 
