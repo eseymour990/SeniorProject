@@ -2,6 +2,7 @@ package com.example.trollsmarter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.trollsmarter.Alerts.LeaderLengthAlert;
+import com.example.trollsmarter.Alerts.UserDataAlert;
 import com.example.trollsmarter.HelperClasses.DiveEquationHelper;
 import com.example.trollsmarter.HelperClasses.UserData;
 
@@ -69,6 +72,16 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.textBox1);
         Button startButton = findViewById(R.id.Start);
         if(!started) {
+            if(userData.GetLure() == null || userData.GetTrollingDevice() == null || userData.GetLeaderLength() == null){
+                DialogFragment dialog = new UserDataAlert();
+                dialog.show(getSupportFragmentManager(), "UserDataAlert");
+                return;
+            }
+            if(tv.getText().length() == 0){
+                DialogFragment dialog = new LeaderLengthAlert();
+                dialog.show(getSupportFragmentManager(), "LeaderLengthAlert");
+                return;
+            }
             tv.setVisibility(View.VISIBLE);
             Location a = new Location(Context.LOCATION_SERVICE);
             a.setSpeed(2.5f);
