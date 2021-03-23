@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public void Start(View view){
         TextView tv = findViewById(R.id.textBox1);
         Button startButton = findViewById(R.id.Start);
-        TextView speed = findViewById(R.id.Speed);
+        final TextView speedView = findViewById(R.id.Speed);
 
         if(!started) {
             if(userData.GetLure() == null || userData.GetTrollingDevice() == null || userData.GetLeaderLength() == null){
@@ -85,8 +86,42 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             tv.setVisibility(View.VISIBLE);
-            Location a = new Location(Context.LOCATION_SERVICE);
-            speed.setText(Float.toString(a.getSpeed()));
+            //code taken from https://stackoverflow.com/questions/4811920/why-getspeed-always-return-0-on-android
+            LocationListener ll = new LocationListener() {
+                private Location mLastLocation;
+
+                @Override
+                public void onLocationChanged(Location pCurrentLocation) {
+                    //calcul manually speed
+                    double speed = 0;
+                    if (this.mLastLocation != null)
+                        speed = Math.sqrt(
+                                Math.pow(pCurrentLocation.getLongitude() - mLastLocation.getLongitude(), 2)
+                                        + Math.pow(pCurrentLocation.getLatitude() - mLastLocation.getLatitude(), 2)
+                        ) / (pCurrentLocation.getTime() - this.mLastLocation.getTime());
+                    //if there is speed from location
+                    if (pCurrentLocation.hasSpeed())
+                        //get location speed
+                        speed = pCurrentLocation.getSpeed();
+                    this.mLastLocation = pCurrentLocation;
+                    speedView.setText(Double.toString(speed));
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            };
             TextView textView = findViewById(R.id.desiredDepth);
             DiveEquationHelper lureHelper = new DiveEquationHelper(userData.GetLure().getDiveCurve());
             DiveEquationHelper trollingDeviceHelper = new DiveEquationHelper(userData.GetTrollingDevice().getDiveCurve());
