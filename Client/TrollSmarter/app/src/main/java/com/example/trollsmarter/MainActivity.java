@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     public void Start(View view){
         TextView tv = findViewById(R.id.textBox1);
         Button startButton = findViewById(R.id.Start);
+        TextView speed = findViewById(R.id.Speed);
+
         if(!started) {
             if(userData.GetLure() == null || userData.GetTrollingDevice() == null || userData.GetLeaderLength() == null){
                 DialogFragment dialog = new UserDataAlert();
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
             tv.setVisibility(View.VISIBLE);
             Location a = new Location(Context.LOCATION_SERVICE);
-            a.setSpeed(2.5f);
+            speed.setText(Float.toString(a.getSpeed()));
             TextView textView = findViewById(R.id.desiredDepth);
             DiveEquationHelper lureHelper = new DiveEquationHelper(userData.GetLure().getDiveCurve());
             DiveEquationHelper trollingDeviceHelper = new DiveEquationHelper(userData.GetTrollingDevice().getDiveCurve());

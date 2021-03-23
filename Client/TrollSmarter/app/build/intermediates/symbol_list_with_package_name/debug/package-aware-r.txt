@@ -1072,6 +1072,7 @@ id History
 id META
 id SHIFT
 id SYM
+id Speed
 id Start
 id Troll
 id TrollingDeviceSpinner
