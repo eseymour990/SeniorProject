@@ -8,10 +8,10 @@ app = config(app);
 var CryptoJS = require("crypto-js");
 
 var con = mysql.createConnection({
-	user: "eseymour",
+	user: process.argv[2],
 	host : "localhost",
-	password: "fredfrdeburger",
-	database: "eseymour",
+	password: process.argv[3],
+	database: process.argv[4],
 	insecureAuth: true
 });
 
@@ -22,6 +22,7 @@ con.connect(function(err) {
 });
 
 app.listen(8002, () => {
+	console.log(process.argv[2]);
 	console.log("Server running on port 8002");
 });
 
@@ -102,6 +103,12 @@ app.get("/AddLure", (req,res,next) => {
 		return res.status(401).json({message : "Not Auth"});
 	}
 	console.log("add Lure");
+});
+
+app.get("/AddTrollingDevice",(req,res,next)=>{
+	if(!IsAuth(req))
+		return res.status(401).json({message : "Not Auth});
+	console.log("HIT TROLLING DEVICE");
 });
 
 function IsAuth(req)
