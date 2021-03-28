@@ -93,6 +93,7 @@
         android:layout_height="69dp"
         android:layout_marginStart="224dp"
         android:layout_marginTop="16dp"
+        android:onClick="addTrollingDevice"
         android:text="Add Trolling Device"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

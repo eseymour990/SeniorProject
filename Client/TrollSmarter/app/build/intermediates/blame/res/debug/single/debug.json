@@ -68,6 +68,10 @@
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
+        "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_gear_input.xml.flat",
+        "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\gear_input.xml"
+    },
+    {
         "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },

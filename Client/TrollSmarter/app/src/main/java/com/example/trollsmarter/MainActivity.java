@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.trollsmarter.Alerts.Alert;
 import com.example.trollsmarter.Alerts.LeaderLengthAlert;
 import com.example.trollsmarter.Alerts.UserDataAlert;
 import com.example.trollsmarter.HelperClasses.DiveEquationHelper;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public String User;
     public UserData userData;
     public boolean started;
+    public Alert dialog;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(!started) {
             if(userData.GetLure() == null || userData.GetTrollingDevice() == null || userData.GetLeaderLength() == null){
-                DialogFragment dialog = new UserDataAlert();
+                dialog = new UserDataAlert();
                 dialog.show(getSupportFragmentManager(), "UserDataAlert");
                 return;
             }
             if(tv.getText().length() == 0){
-                DialogFragment dialog = new LeaderLengthAlert();
+                dialog = new LeaderLengthAlert();
                 dialog.show(getSupportFragmentManager(), "LeaderLengthAlert");
                 return;
             }

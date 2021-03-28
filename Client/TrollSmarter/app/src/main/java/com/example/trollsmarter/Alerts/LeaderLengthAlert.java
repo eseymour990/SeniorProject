@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-public class LeaderLengthAlert extends DialogFragment {
+public class LeaderLengthAlert extends Alert {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 

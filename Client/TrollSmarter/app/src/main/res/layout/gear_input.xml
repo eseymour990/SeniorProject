@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="5 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/five"/>
+        </LinearLayout>
+
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="10 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/onezero"/>
+        </LinearLayout>
+
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="15 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/onefive"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="20 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/twozero"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="25 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/twofive"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="30 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/threezero"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="35 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/threefive"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="40 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/fourzero"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="45 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/fourfive"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="50 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/fivezero"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="55 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/fivefive"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="60 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/sixzero"/>
+        </LinearLayout>
+        <LinearLayout>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".25"
+                android:text="65 ft:" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".75"
+                android:inputType="number"
+                android:id="@+id/sixfive"/>
+        </LinearLayout>
+        <LinearLayout>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Save"
+                android:id="@+id/saveButton"/>
+        </LinearLayout>
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

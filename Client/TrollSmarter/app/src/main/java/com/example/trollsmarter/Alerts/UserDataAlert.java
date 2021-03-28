@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-public class UserDataAlert extends DialogFragment {
+public class UserDataAlert extends Alert {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

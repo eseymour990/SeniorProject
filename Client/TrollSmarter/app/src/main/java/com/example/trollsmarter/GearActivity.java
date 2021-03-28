@@ -1,9 +1,11 @@
 package com.example.trollsmarter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.trollsmarter.Alerts.Alert;
+import com.example.trollsmarter.Alerts.InputDialog;
 import com.example.trollsmarter.Alerts.LeaderLengthAlert;
 import com.example.trollsmarter.HelperClasses.Lure;
 import com.example.trollsmarter.HelperClasses.UserData;
@@ -47,8 +51,18 @@ public class GearActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Button saveButton = findViewById(R.id.saveButton);
+        Button addTrollingDeviceButton = findViewById(R.id.AddTrollingDevice);
         user = intent.getStringExtra("User");
         userData = (UserData) intent.getSerializableExtra("UserData");
+        addTrollingDeviceButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                InputDialog inputDialog = new InputDialog(GearActivity.this, user, "AddTrollingDevice");
+                inputDialog.show();
+            }
+
+        });
         saveButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
@@ -59,7 +73,7 @@ public class GearActivity extends AppCompatActivity {
                 userData.SetTrollingDevice((Lure) trollingSpinner.getSelectedItem());
                 userData.SetLure((Lure) lureSpinner.getSelectedItem());
                 if(tv.getText().toString().length() == 0){
-                    DialogFragment dialog = new LeaderLengthAlert();
+                    Alert dialog = new LeaderLengthAlert();
                     dialog.show(getSupportFragmentManager(), "LeaderLengthAlert");
                     TextView leaderlength = findViewById(R.id.leaderLengthText);
                     leaderlength.setTextColor(Color.RED);

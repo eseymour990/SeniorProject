@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-public class DepthAlert  extends DialogFragment {
+public class DepthAlert extends Alert {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
