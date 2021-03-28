@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.trollsmarter.GearActivity;
 import com.example.trollsmarter.HelperClasses.Lure;
 import com.example.trollsmarter.HelperClasses.UserData;
 import com.example.trollsmarter.R;
@@ -28,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class InputDialog extends Dialog implements
         android.view.View.OnClickListener {
@@ -73,6 +75,13 @@ public class InputDialog extends Dialog implements
                 fullJson = new JsonObject();
                 fullJson.addProperty("Name", value);
                 fullJson.addProperty("Depths", String.valueOf(jsonObject));
+                try {
+                    new AddDeviceTask().execute(user).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return;
             }
         });
