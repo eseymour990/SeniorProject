@@ -18,16 +18,24 @@ import com.example.trollsmarter.HelperClasses.UserData;
 import com.example.trollsmarter.R;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -37,8 +45,9 @@ public class InputDialog extends Dialog implements
     public Activity c;
     public Dialog d;
     public Button save;
-    public JsonObject jsonObject;
-    public JsonObject fullJson;
+    public JSONArray jsonArray;
+    public JSONObject jsonObject;
+    public JSONObject fullJson;
     public String user;
     public String Path;
     public InputDialog(Activity a, String u, String p) {
@@ -72,9 +81,17 @@ public class InputDialog extends Dialog implements
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = input.getText().toString();
-                fullJson = new JsonObject();
-                fullJson.addProperty("Name", value);
-                fullJson.addProperty("Depths", String.valueOf(jsonObject));
+                fullJson = new JSONObject();
+                try {
+                    fullJson.put("Name", value);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fullJson.put("Depths", jsonArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 try {
                     new AddDeviceTask().execute(user).get();
                 } catch (ExecutionException e) {
@@ -87,11 +104,15 @@ public class InputDialog extends Dialog implements
         });
 
         alert.show();
-        GetData();
+        try {
+            GetData();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         dismiss();
     }
 
-    public void GetData() {
+    public void GetData() throws JSONException {
         Integer[] ids = {R.id.five,
                 R.id.onezero, R.id.onefive,
                 R.id.twozero, R.id.twofive,
@@ -110,12 +131,17 @@ public class InputDialog extends Dialog implements
         }
         if(nullIndex == null)
             nullIndex = ids.length;
-        jsonObject = new JsonObject();
-        jsonObject.addProperty("0", "0");
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        jsonObject.put("0", "0");
+        jsonArray.put(jsonObject);
         int depth = 5;
         for(int i = 0; i < nullIndex; i++){
+            jsonObject = new JSONObject();
             editText = findViewById(ids[i]);
-            jsonObject.addProperty(String.valueOf(depth), editText.getText().toString());
+            jsonObject.put(String.valueOf(depth), editText.getText().toString());
+            jsonArray.put(jsonObject);
+
             depth += 5;
         }
         depth = 0;
@@ -138,10 +164,20 @@ public class InputDialog extends Dialog implements
                     "Bearer " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             try {
                 con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-                con.setRequestProperty("Content-Type", "application/json; utf-8");
+                con.setDoOutput( true );
+                con.setInstanceFollowRedirects( false );
+                con.setRequestMethod( "POST" );
                 con.setRequestProperty("Authorization", header);
-                con.addRequestProperty("JSONValue", fullJson.getAsString());
+                con.setRequestProperty( "Content-Type", "application/json");
+                con.setRequestProperty( "charset", "utf-8");
+                con.setRequestProperty( "Content-Length", Integer.toString( fullJson.toString().length() ));
+                con.setUseCaches( false );
+                con.connect();
+                DataOutputStream ds = new DataOutputStream(con.getOutputStream ());
+                ds.writeBytes(fullJson.toString());
+                ds.flush ();
+                ds.close ();
+                responseCode = con.getResponseCode();
 
                 //stream code taken from https://stackoverflow.com/questions/33229869/get-json-
                 con.disconnect();
