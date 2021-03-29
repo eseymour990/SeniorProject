@@ -133,13 +133,15 @@ public class InputDialog extends Dialog implements
             nullIndex = ids.length;
         jsonArray = new JSONArray();
         jsonObject = new JSONObject();
-        jsonObject.put("0", "0");
+        jsonObject.put("subDepth", "0");
+        jsonObject.put("lineOut", "0");
         jsonArray.put(jsonObject);
         int depth = 5;
         for(int i = 0; i < nullIndex; i++){
             jsonObject = new JSONObject();
             editText = findViewById(ids[i]);
-            jsonObject.put(String.valueOf(depth), editText.getText().toString());
+            jsonObject.put("subDepth", String.valueOf(depth));
+            jsonObject.put("lineOut", editText.getText().toString());
             jsonArray.put(jsonObject);
 
             depth += 5;
