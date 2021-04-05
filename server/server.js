@@ -1,11 +1,16 @@
 var express = require("express");
 var mysql = require("mysql");
 var jwt = require('jsonwebtoken');
-var bodyParser = require('./config.js');
+var bodyParser = require('body-parser');
 var app = express();
 var config = require('./config.js');
 app = config(app);
 var CryptoJS = require("crypto-js");
+const { PythonShell } = require('python-shell');
+
+app.use('/', express.static(__dirname));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 var con = mysql.createConnection({
 	user: process.argv[2],
@@ -14,6 +19,7 @@ var con = mysql.createConnection({
 	database: process.argv[4],
 	insecureAuth: true
 });
+
 
 con.connect(function(err) {
 	  if (err) 
@@ -105,10 +111,65 @@ app.get("/AddLure", (req,res,next) => {
 	console.log("add Lure");
 });
 
-app.get("/AddTrollingDevice",(req,res,next)=>{
-	if(!IsAuth(req))
-		return res.status(401).json({message : "Not Auth});
+app.post("/AddTrollingDevice",(req,res,next)=>{
+	console.log("SHOULD BE HERE");
+	if(!IsAuth(req)){
+		return res.status(401).json({message : "Not Auth"});
+	}
 	console.log("HIT TROLLING DEVICE");
+	var json = JSON.parse(JSON.stringify(req.body))
+	console.log(json)
+	console.log(typeof(json))
+	var name = json.Name;
+	console.log(name)
+	var depthdata = json.Depths;
+	console.log("Depth data -> " + depthdata)
+	var d = 0;
+	var depthArr = [depthdata.length]
+	var lineoutArr = [depthdata.length];
+	for(var i = 0; i < depthdata.length; i++)
+	{
+		console.log(depthdata[i].subDepth + " " + depthdata[i].lineOut)
+		depthArr[i] = depthdata[i].subDepth;
+		lineoutArr[i] = depthdata[i].lineOut;
+	}
+	
+	let options = {
+		mode: 'text',
+		//pythonPath: 'python',
+		pythonOptions: ['-u'],
+		//scriptPath: 'path',
+		args:[depthArr, lineoutArr]
+	};
+	PythonShell.run('pyProcesses/makeEq.py', options, function(err, results){
+		if(err) console.log(err);
+		console.log('results: %j', results)
+		var resultList = results[0]
+		resultList = resultList.substring(1)
+		resultList = resultList.substring(0, resultList.length - 1)
+		resultArray = resultList.split(', ')
+		console.log(resultArray[0])
+		console.log(resultArray[1])
+		//console.log("result 2: " + resultList[1].substring(1))
+		var sql = "insert into Gear (GearType, name, Username) values (?, ?, ?)"
+		var values = [1, name, CryptoJS.MD5(GetUsername(req)).toString()];
+		console.log(GetUsername(req));
+		con.query(sql, values, function(err, result){
+			if(err) throw err;
+		});
+		sql = "insert into Lure(ID, DiveEquation) values((select ID from Gear where name = ?), ?);";
+		var diveEq = "y=" + resultArray[0] + "(x)" + "+" + resultArray[1];
+		values = [name, diveEq]
+		con.query(sql, values, function(err, result){
+			if(err) throw err;
+		});
+		console.log("SUCCESS")
+		return res.status(200)
+
+	});
+
+
+	//console.log("NAME DATA -> " + name.Name)
 });
 
 function IsAuth(req)

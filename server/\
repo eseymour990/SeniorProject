@@ -6,7 +6,7 @@ x = numpy.delete(x,0)
 
 y = numpy.delete(y,0)
 z = numpy.polyfit(numpy.log10(x),y,1)
-#z[0] = z[0] * 2.3
+z[0] = z[0] * 2.3
 a = z.tolist()
 print(a)
 sys.stdout.flush()
