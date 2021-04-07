@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addTrollingDevice2"
+        android:id="@+id/addLure"
         android:layout_width="149dp"
         android:layout_height="69dp"
         android:layout_marginStart="224dp"

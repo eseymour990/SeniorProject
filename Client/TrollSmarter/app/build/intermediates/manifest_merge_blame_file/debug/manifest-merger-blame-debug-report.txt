@@ -32,47 +32,48 @@
 20-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:9:9-54
 21        android:supportsRtl="true"
 21-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:10:9-35
-22        android:theme="@style/AppTheme"
-22-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:12:9-40
-23        android:usesCleartextTraffic="true" >
-23-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:11:9-44
-24        <activity android:name="com.example.trollsmarter.HistoryActivity" />
-24-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:13:9-62
-24-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:13:19-50
-25        <activity android:name="com.example.trollsmarter.GearActivity" />
-25-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:14:9-50
-25-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:14:19-47
-26        <activity
-26-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:15:9-23:20
-27            android:name="com.example.trollsmarter.ui.login.LoginActivity"
-27-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:16:13-51
-28            android:label="@string/title_activity_login" >
-28-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:17:13-57
-29            <intent-filter>
-29-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:18:13-22:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:19:17-69
-30-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:19:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:21:17-77
-32-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:21:27-74
-33            </intent-filter>
-34        </activity>
-35        <activity android:name="com.example.trollsmarter.MainActivity" />
-35-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:24:9-50
-35-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:24:19-47
-36
-37        <provider
-37-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
-38            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-38-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
-39            android:authorities="com.example.trollsmarter.lifecycle-process"
-39-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
-40            android:exported="false"
-40-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
-41            android:multiprocess="true" />
-41-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
-42    </application>
-43
-44</manifest>
+22        android:testOnly="true"
+23        android:theme="@style/AppTheme"
+23-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:12:9-40
+24        android:usesCleartextTraffic="true" >
+24-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:11:9-44
+25        <activity android:name="com.example.trollsmarter.HistoryActivity" />
+25-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:13:9-62
+25-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:13:19-50
+26        <activity android:name="com.example.trollsmarter.GearActivity" />
+26-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:14:9-50
+26-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:14:19-47
+27        <activity
+27-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:15:9-23:20
+28            android:name="com.example.trollsmarter.ui.login.LoginActivity"
+28-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:16:13-51
+29            android:label="@string/title_activity_login" >
+29-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:17:13-57
+30            <intent-filter>
+30-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:18:13-22:29
+31                <action android:name="android.intent.action.MAIN" />
+31-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:19:17-69
+31-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:19:25-66
+32
+33                <category android:name="android.intent.category.LAUNCHER" />
+33-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:21:17-77
+33-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:21:27-74
+34            </intent-filter>
+35        </activity>
+36        <activity android:name="com.example.trollsmarter.MainActivity" />
+36-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:24:9-50
+36-->C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:24:19-47
+37
+38        <provider
+38-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
+39            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+39-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
+40            android:authorities="com.example.trollsmarter.lifecycle-process"
+40-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
+41            android:exported="false"
+41-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
+42            android:multiprocess="true" />
+42-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\894873d045a0a220e7c24d43283db9eb\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
+43    </application>
+44
+45</manifest>

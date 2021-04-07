@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else if(R.id.History == item.getItemId()){
-            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            intent.putExtra("User", User);
+            intent.putExtra("UserData", userData);
+            startActivity(intent);
             finish();
         }
         return true;
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Start(View view){
         TextView tv = findViewById(R.id.textBox1);
+        Button fishCaughtButton = findViewById(R.id.fishCaughtButton);
         Button startButton = findViewById(R.id.Start);
         final TextView speedView = findViewById(R.id.Speed);
 
@@ -131,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
             double fin = trollingDeviceHelper.FindLineOut(Double.parseDouble(textView.getText().toString()) - lureDepth);
             started = true;
             startButton.setText("Stop");
+            fishCaughtButton.setVisibility(View.VISIBLE);
+            //fishCaughtButton.setOnClickListener();
             tv.setText("Line out: " + fin);
         }
         else {

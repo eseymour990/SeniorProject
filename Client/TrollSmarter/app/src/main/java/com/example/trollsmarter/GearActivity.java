@@ -1,11 +1,9 @@
 package com.example.trollsmarter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,13 +18,16 @@ import com.example.trollsmarter.Alerts.Alert;
 import com.example.trollsmarter.Alerts.InputDialog;
 import com.example.trollsmarter.Alerts.LeaderLengthAlert;
 import com.example.trollsmarter.HelperClasses.Lure;
+import com.example.trollsmarter.HelperClasses.RefreshEvent;
 import com.example.trollsmarter.HelperClasses.UserData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,14 +45,33 @@ public class GearActivity extends AppCompatActivity {
     public List<Lure> trollingDeviceList;
     private String user;
     private UserData userData;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(RefreshEvent event) throws ExecutionException, InterruptedException {
+        RefreshLists();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gear);
-
         Intent intent = getIntent();
         Button saveButton = findViewById(R.id.saveButton);
         Button addTrollingDeviceButton = findViewById(R.id.AddTrollingDevice);
+        Button addLureButton = findViewById(R.id.addLure);
         user = intent.getStringExtra("User");
         userData = (UserData) intent.getSerializableExtra("UserData");
         addTrollingDeviceButton.setOnClickListener( new View.OnClickListener() {
@@ -59,6 +79,15 @@ public class GearActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InputDialog inputDialog = new InputDialog(GearActivity.this, user, "AddTrollingDevice");
+                inputDialog.show();
+            }
+
+        });
+        addLureButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                InputDialog inputDialog = new InputDialog(GearActivity.this, user, "AddLure");
                 inputDialog.show();
             }
 
@@ -79,6 +108,7 @@ public class GearActivity extends AppCompatActivity {
                     leaderlength.setTextColor(Color.RED);
                     return;
                 }
+
                 userData.SetLeaderLength(tv.getText().toString());
                 Intent mainIntent = new Intent(GearActivity.this, MainActivity.class);
 
@@ -89,19 +119,8 @@ public class GearActivity extends AppCompatActivity {
             }
         });
 
-
         try {
-            Lure[] lures = new LureGetTask().execute(user).get();
-            Lure[] trollingDevice = new TrollingGetTask().execute(user).get();
-            Spinner lureSpinner = findViewById(R.id.lureSpinner);
-            ArrayAdapter userAdapter = new ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, lureList);
-            userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            lureSpinner.setAdapter(userAdapter);
-
-            Spinner trollingDeviceSpinner = findViewById(R.id.TrollingDeviceSpinner);
-            ArrayAdapter trollingAdapter = new ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, trollingDeviceList);
-            trollingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            trollingDeviceSpinner.setAdapter(trollingAdapter);
+            RefreshLists();
 
 
         } catch (ExecutionException e) {
@@ -109,6 +128,23 @@ public class GearActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+    }
+
+
+
+    private void RefreshLists() throws ExecutionException, InterruptedException {
+        Lure[] lures = new LureGetTask().execute(user).get();
+        Lure[] trollingDevice = new TrollingGetTask().execute(user).get();
+        Spinner lureSpinner = findViewById(R.id.lureSpinner);
+        ArrayAdapter userAdapter = new ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, lureList);
+        userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        lureSpinner.setAdapter(userAdapter);
+
+        Spinner trollingDeviceSpinner = findViewById(R.id.TrollingDeviceSpinner);
+        ArrayAdapter trollingAdapter = new ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, trollingDeviceList);
+        trollingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        trollingDeviceSpinner.setAdapter(trollingAdapter);
     }
 
     @Override
@@ -125,16 +161,31 @@ public class GearActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.Troll == item.getItemId()) {
-            startActivity(new Intent(GearActivity.this, MainActivity.class));
+            Intent intent = new Intent(GearActivity.this, MainActivity.class);
+            intent.putExtra("User", user);
+            intent.putExtra("UserData", userData);
+            startActivity(intent);
             finish();
         }
         else if(R.id.History == item.getItemId()){
-            startActivity(new Intent(GearActivity.this, HistoryActivity.class));
+            Intent intent = new Intent(GearActivity.this, HistoryActivity.class);
+            intent.putExtra("User", user);
+            intent.putExtra("UserData", userData);
+            startActivity(intent);
             finish();
         }
         return true;
     }
 
+    public void refresh(){
+        try {
+            RefreshLists();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public class LureGetTask extends AsyncTask<String, String, Lure[]>{
 

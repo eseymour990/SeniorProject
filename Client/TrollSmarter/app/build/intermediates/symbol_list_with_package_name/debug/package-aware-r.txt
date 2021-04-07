@@ -1129,7 +1129,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id addTrollingDevice2
+id addLure
 id alertTitle
 id all
 id always
@@ -1180,6 +1180,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id fishCaughtButton
 id five
 id fivefive
 id fivezero

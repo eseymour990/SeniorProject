@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
     <TextView
@@ -21,12 +22,14 @@
         android:id="@+id/Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="161dp"
         android:layout_marginBottom="164dp"
         android:onClick="Start"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_editor_absoluteX="138px"
         app:layout_editor_absoluteY="165px" />
 
@@ -65,5 +68,18 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="181dp"
         tools:layout_editor_absoluteY="312dp" />
+
+    <Button
+        android:id="@+id/fishCaughtButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginBottom="25dp"
+        android:text="Figh Caught"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/Start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

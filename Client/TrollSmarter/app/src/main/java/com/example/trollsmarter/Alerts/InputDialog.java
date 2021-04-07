@@ -12,35 +12,25 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.trollsmarter.GearActivity;
 import com.example.trollsmarter.HelperClasses.Lure;
-import com.example.trollsmarter.HelperClasses.UserData;
+import com.example.trollsmarter.HelperClasses.RefreshEvent;
 import com.example.trollsmarter.R;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class InputDialog extends Dialog implements
-        android.view.View.OnClickListener {
+        android.view.View.OnClickListener, DialogInterface {
 
     public Activity c;
     public Dialog d;
@@ -66,7 +56,9 @@ public class InputDialog extends Dialog implements
         save = (Button) findViewById(R.id.saveButton);
         save.setOnClickListener(this);
 
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -78,7 +70,7 @@ public class InputDialog extends Dialog implements
         final EditText input = new EditText(getContext());
         alert.setView(input);
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton("Ok", new OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = input.getText().toString();
                 fullJson = new JSONObject();
@@ -102,7 +94,12 @@ public class InputDialog extends Dialog implements
                 return;
             }
         });
-
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener(){
+                @Override
+                public void onDismiss(DialogInterface dialogInterface){
+                    EventBus.getDefault().post(new RefreshEvent());
+                }
+        });
         alert.show();
         try {
             GetData();
@@ -181,7 +178,6 @@ public class InputDialog extends Dialog implements
                 ds.close ();
                 responseCode = con.getResponseCode();
 
-                //stream code taken from https://stackoverflow.com/questions/33229869/get-json-
                 con.disconnect();
 
 
