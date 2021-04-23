@@ -48,6 +48,10 @@
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_item.xml.flat",
+        "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\list_item.xml"
+    },
+    {
         "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_simple_spinner_dropdown_item.xml.flat",
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\simple_spinner_dropdown_item.xml"
     },

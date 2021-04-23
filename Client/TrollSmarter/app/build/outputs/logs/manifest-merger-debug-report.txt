@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
+ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\d9fe90b20373e53cda14cf70a3a9d6b6\material-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\f209091eb3926c649f0b3346884e478c\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\75baa063235eedb7ab2cc635bdb88d73\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
@@ -41,20 +41,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\ellio\.gradle\ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\7bcdab9edca68925f6bcb92ddd8a20de\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\d711f81259436f09ffdf0b48105165e3\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\ellio\.gradle\caches\transforms-2\files-2.1\87e4a5cb4839ebd5d033fa0ae6227780\print-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
 	package
 		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:3:5-39
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
+		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-29:12
+		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:1-30:12
 		INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:2:11-69
@@ -120,10 +120,14 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:27:5-78
 	android:name
 		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:27:22-76
-uses-permission#android.permission.INTERNET
-ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:28:5-66
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:28:5-80
 	android:name
-		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:28:22-64
+		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:28:22-78
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:29:5-66
+	android:name
+		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:29:22-64
 uses-sdk
 INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml
