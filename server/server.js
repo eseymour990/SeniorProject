@@ -103,12 +103,76 @@ app.get("/AuthUser", (req,res,next) => {
 
 
 
-app.get("/AddLure", (req,res,next) => {
+app.post("/AddLure", (req,res,next) => {
 	//verify user is authed
 	if(!IsAuth(req)){
 		return res.status(401).json({message : "Not Auth"});
 	}
-	console.log("add Lure");
+	var json = JSON.parse(JSON.stringify(req.body))
+	        console.log(json)
+	        console.log(typeof(json))
+	        var name = json.Name;
+	        console.log(name)
+	        var depthdata = json.Depths;
+	        console.log("Depth data -> " + depthdata)
+	        var d = 0;
+	        var depthArr = [depthdata.length]
+	        var lineoutArr = [depthdata.length];
+	        for(var i = 0; i < depthdata.length; i++)
+		{
+			console.log(depthdata[i].subDepth + " " + depthdata[i].lineOut)
+	                depthArr[i] = depthdata[i].subDepth;
+	                lineoutArr[i] = depthdata[i].lineOut;
+	        }
+
+	        let options = {
+	            	mode: 'text',
+	     		//pythonPath: 'python',
+	                pythonOptions: ['-u'],
+                        //scriptPath: 'path',
+		        args:[depthArr, lineoutArr]
+                };
+		if(lineoutArr.every(item => item === 0)){
+                        var sql = "insert into Gear (GearType, name, Username) values (?, ?, ?)"
+	                var values = [3, name, CryptoJS.MD5(GetUsername(req)).toString()];
+                        con.query(sql, values, function(err, result){
+        	                if(err) throw err;
+	                });
+                        sql = "insert into Lure(ID, DiveEquation) values((select ID from Gear where name = ?), ?);";
+                        var diveEq = "y=0(x)+0";
+                        values = [name, diveEq]
+                        con.query(sql, values, function(err, result){
+                                if(err) throw err;
+                        });
+
+			return res.status(200).json({"Message":"OK"});
+		}
+
+	        PythonShell.run('pyProcesses/makeEq.py', options, function(err, results){
+	                if(err) console.log(err);
+	                console.log('results: %j', results)
+	                var resultList = results[0]
+	                resultList = resultList.substring(1)
+	                resultList = resultList.substring(0, resultList.length - 1)
+	                resultArray = resultList.split(', ')
+	                console.log(resultArray[0])
+	                console.log(resultArray[1])
+			
+	                //console.log("result 2: " + resultList[1].substring(1))
+	                var sql = "insert into Gear (GearType, name, Username) values (?, ?, ?)"
+                        var values = [2, name, CryptoJS.MD5(GetUsername(req)).toString()];
+			con.query(sql, values, function(err, result){
+				if(err) throw err;
+			});
+			sql = "insert into Lure(ID, DiveEquation) values((select ID from Gear where name = ?), ?);";
+			var diveEq = "y=" + resultArray[0] + "(x)" + "+" + resultArray[1];
+			values = [name, diveEq]
+			con.query(sql, values, function(err, result){
+				if(err) throw err;
+			});
+			console.log("SUCCESS")
+			return res.status(200).json({"Message":"OK"});
+		});
 });
 
 app.post("/AddTrollingDevice",(req,res,next)=>{
@@ -164,8 +228,7 @@ app.post("/AddTrollingDevice",(req,res,next)=>{
 			if(err) throw err;
 		});
 		console.log("SUCCESS")
-		return res.status(200)
-
+		return res.status(200).json({"Message":"OK"});
 	});
 
 
@@ -206,15 +269,8 @@ function GetUsername(req)
 }
 
 app.get("/GetLures", (req, res, next) => {
-	if(!req.headers.authorization || req.headers.authorization.indexOf('Bearer') === -1){
+	if(!IsAuth(req)){
 		return res.status(401).json({message: 'No Auth'});
-	}
-	const base64Cred= req.headers.authorization.split(' ')[1];
-	const cred = Buffer.from(base64Cred, 'base64').toString('ascii');
-	try{
-	var decode = jwt.verify(cred, 'testSecret');
-	}catch{
-		return res.status(401).json({message : "Not Authorized"});
 	}
 	var sql = "select G.Name, L.DiveEquation from Lure L inner join Gear G on L.ID = G.ID inner join gearType GT on G.GearType = GT.id where (GT.Type = 'Diving lure' or GT.Type = 'Flat lure') and (G.Username = ?);";
 	        var values = [CryptoJS.MD5(GetUsername(req)).toString()];
@@ -224,6 +280,17 @@ app.get("/GetLures", (req, res, next) => {
 			                return res.status(200).json(JSON.stringify(result));
 			        });
 
+});
+
+app.get("/GetHistory",(req,res,next) => {
+	if(!IsAuth(req))
+		return res.status(401).json({message: "NO AUTH"});
+	var sql = "SELECT Depth, LureName, Date FROM History WHERE Username = ?;";
+	var values = [CryptoJS.MD5(GetUsername(req)).toString()];
+	con.query(sql,values,function(err,result){
+		if(err) throw err;
+		return res.status(200).json(JSON.stringify(result));
+	});
 });
 
 app.get("/GetTrollingDevices",(req, res, next) => {
