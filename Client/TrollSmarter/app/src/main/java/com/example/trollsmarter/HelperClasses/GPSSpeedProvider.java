@@ -26,7 +26,7 @@ public class GPSSpeedProvider implements LocationListener {
         speed = 2.23694 * (distance/(elapsedTime - lastTime));
         lastLocation = location;
         lastTime = System.currentTimeMillis() / 1000L;
-        EventBus.getDefault().post(new SpeedUpdateEvent());
+        EventBus.getDefault().post(new SpeedUpdateEvent(speed));
     }
 
     public GPSSpeedProvider(){

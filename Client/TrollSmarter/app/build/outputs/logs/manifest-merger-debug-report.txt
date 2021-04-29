@@ -99,7 +99,7 @@ ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarte
 activity#com.example.trollsmarter.ui.login.LoginActivity
 ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:15:9-23:20
 	android:label
-		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:17:13-57
+		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:17:13-45
 	android:name
 		ADDED from C:\Users\ellio\AndroidStudioProjects\SeniorProject\Client\TrollSmarter\app\src\main\AndroidManifest.xml:16:13-51
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER

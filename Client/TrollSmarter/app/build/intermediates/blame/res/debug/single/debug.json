@@ -32,6 +32,10 @@
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_line_input.xml.flat",
+        "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\line_input.xml"
+    },
+    {
         "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
@@ -68,12 +72,12 @@
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\activity_main.xml"
-    },
-    {
         "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_gear_input.xml.flat",
         "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\gear_input.xml"
+    },
+    {
+        "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\ellio\\AndroidStudioProjects\\SeniorProject\\Client\\TrollSmarter\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",

@@ -7,15 +7,17 @@ import java.io.Serializable;
 public class UserData implements Serializable {
     public Lure _lure;
     public Lure _trollingDevice;
-    public String _lineThickness;
+    public Line _line;
     public String _leaderLength;
-    public String _lineThicknessMultiplier;
+    public double _lineThicknessMultiplier;
 
 
-    public String GetLineThicknessMultiplier(){
-        return _lineThicknessMultiplier;
+    public double GetLineThicknessMultiplier(){
+        Double thickness = Double.parseDouble(_line.getLineThickness());
+
+        return 1+ ((thickness - .3)*.3);
     }
-    public void SetLineThicknessMultiplier(String lineThicknessMultiplier){
+    public void SetLineThicknessMultiplier(double lineThicknessMultiplier){
         _lineThicknessMultiplier = lineThicknessMultiplier;
     }
 
@@ -33,11 +35,11 @@ public class UserData implements Serializable {
         _trollingDevice = trollingDevice;
     }
 
-    public String GetLineThickness(){
-        return _lineThickness;
+    public Line GetLineThickness(){
+        return _line;
     }
-    public void SetLineThickness(String lineThickness){
-        _lineThickness = lineThickness;
+    public void SetLineThickness(Line lineThickness){
+        _line = lineThickness;
     }
 
     public String GetLeaderLength(){

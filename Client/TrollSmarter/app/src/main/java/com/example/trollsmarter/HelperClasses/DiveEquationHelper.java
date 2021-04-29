@@ -10,11 +10,12 @@ public class DiveEquationHelper {
         B = Double.parseDouble(diveEquation.substring(diveEquation.indexOf("x") + 3));
     }
 
-    public double FindLineOut(double Depth){
+    public double FindLineOut(double Depth, double lineThicknessMult){
         double top = -Depth+B;
         double bottom = A;
         double logx = top/-bottom;
-        return Math.pow(10,logx);
+
+        return Math.pow(10,logx)/lineThicknessMult;
     }
 
     public double FindDepth(double lineOut){

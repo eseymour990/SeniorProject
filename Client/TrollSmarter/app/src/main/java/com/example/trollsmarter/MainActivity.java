@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean started;
     public Alert dialog;
     public String depth;
+    public double lineOut;
     public GPSSpeedProvider gpsSpeedProvider;
     public LocationManager locationManager;
     public LocationListener locationListener;
@@ -101,12 +102,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(SpeedUpdateEvent event) throws ExecutionException, InterruptedException {
-        UpdateSpeed();
+        UpdateSpeed(event.Speed);
     }
 
-    private void UpdateSpeed() {
+    private void UpdateSpeed(double Speed) {
         TextView textView = findViewById(R.id.Speed);
         textView.setText(locationListener.toString());
+        TextView tv = findViewById(R.id.textBox1);
+        double speedDiffrence = Speed - 2.5;
+        speedDiffrence = 1+ (speedDiffrence / 10);
+
+
+        tv.setText("Line out: " + lineOut * speedDiffrence);
+
     }
 
     @Override
@@ -120,9 +128,20 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
         started = false;
+
+
+    }
+
+
+    public void Start(View view){
+        TextView tv = findViewById(R.id.textBox1);
+        Button fishCaughtButton = findViewById(R.id.fishCaughtButton);
+        Button startButton = findViewById(R.id.Start);
+        final TextView speedView = findViewById(R.id.Speed);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new GPSSpeedProvider();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -133,16 +152,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-
-    }
-
-
-    public void Start(View view){
-        TextView tv = findViewById(R.id.textBox1);
-        Button fishCaughtButton = findViewById(R.id.fishCaughtButton);
-        Button startButton = findViewById(R.id.Start);
-        final TextView speedView = findViewById(R.id.Speed);
-
         if(!started) {
             if(userData.GetLure() == null || userData.GetTrollingDevice() == null || userData.GetLeaderLength() == null){
                 dialog = new UserDataAlert();
@@ -160,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             DiveEquationHelper lureHelper = new DiveEquationHelper(userData.GetLure().getDiveCurve());
             DiveEquationHelper trollingDeviceHelper = new DiveEquationHelper(userData.GetTrollingDevice().getDiveCurve());
             double lureDepth = lureHelper.FindDepth(Double.parseDouble(userData._leaderLength));
-            double fin = trollingDeviceHelper.FindLineOut(Double.parseDouble(textView.getText().toString()) - lureDepth);
+            double fin = trollingDeviceHelper.FindLineOut(Double.parseDouble(textView.getText().toString()) - lureDepth, userData.GetLineThicknessMultiplier());
             started = true;
             startButton.setText("Stop");
             gpsSpeedProvider = new GPSSpeedProvider();
@@ -172,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             tv.setText("Line out: " + fin);
+            lineOut = fin;
             depth = textView.getText().toString();
         }
         else {
